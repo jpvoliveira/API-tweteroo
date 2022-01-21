@@ -8,6 +8,7 @@ app.use(express.json());
 const users = [];
 const tweets = [];
 let posts = [];
+let postsReset = [];
 let post = { username: "", avatar: "", tweet: "" };
 
 app.post("/sign-up", (req, res) => {
@@ -34,11 +35,20 @@ app.post("/tweets", (req, res) => {
       }
     }
   }
+  posts.reverse();
 });
 
 app.get("/tweets", (req, res) => {
-  console.log(posts);
-  res.send(posts);
+  if (posts.length > 10) {
+    postsReset = [];
+    for (let i = 0; i < 10; i++) {
+      const item = posts[i];
+      postsReset.push(item);
+    }
+    res.send(postsReset);
+  } else {
+    res.send(posts);
+  }
 });
 
 app.listen(5000);
