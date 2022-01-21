@@ -26,9 +26,11 @@ app.post("/tweets", (req, res) => {
   for (let i = 0; i < tweets.length; i++) {
     for (let j = 0; j < users.length; j++) {
       if (tweets[i].username === users[j].username) {
-        post.username = users[j].username;
-        post.avatar = users[j].avatar;
-        post.tweet = tweets[i].tweet;
+        post = {
+          username: users[j].username,
+          avatar: users[j].avatar,
+          tweet: tweets[i].tweet,
+        };
         posts.push(post);
       }
     }
@@ -36,7 +38,7 @@ app.post("/tweets", (req, res) => {
 });
 
 app.get("/tweets", (req, res) => {
-    console.log(posts)
+  console.log(posts);
   res.send(posts);
 });
 
