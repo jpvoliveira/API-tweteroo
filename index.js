@@ -7,7 +7,7 @@ app.use(express.json());
 
 const users = [];
 const tweets = [];
-const posts = [];
+let posts = [];
 let post = { username: "", avatar: "", tweet: "" };
 
 app.post("/sign-up", (req, res) => {
@@ -20,9 +20,8 @@ app.post("/tweets", (req, res) => {
   const published = req.body;
   tweets.push(published);
   res.send("OK");
-  console.log(tweets);
-  console.log(users);
 
+  posts = [];
   for (let i = 0; i < tweets.length; i++) {
     for (let j = 0; j < users.length; j++) {
       if (tweets[i].username === users[j].username) {
